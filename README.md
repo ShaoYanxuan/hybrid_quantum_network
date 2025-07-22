@@ -25,7 +25,7 @@ Figure 4 is plotted using `./fiber_sat/fiber_only.py`.
 
 * `./fiber_matlab/hybrid_rate_calculation.m` optimizes the entanglement distribution rate between end nodes using the hybrid protocol and saves the data in `./hybrid_protocol/alice_bob_hybrid_time_240.csv`. 
 `./fiber_matlab/hybrid_fidelity_calculation.m` optimizes the end-to-end entanglement fidelity and saves the data in `./hybrid_protocol/alice_bob_hybrid_fidelity_240.csv`. 
-`./hybrid_protocol/hybrid.py` plots Figure 6. The size of the ground station grid can be changed. 
+Figure 6 is plotted by `./hybrid_protocol/hybrid.py`. The size of the ground station grid can be changed. 
 
 
 
