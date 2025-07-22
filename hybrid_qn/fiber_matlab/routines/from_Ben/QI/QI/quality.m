@@ -1,0 +1,1 @@
+function Q = quality()  %this is an unfinished function to calculate the quality factor

@@ -1,0 +1,8 @@
+function [params,poop] = measurementmutualinformation(rho)
+%measurement carried out on 1st subsyste
+
+
+S=partialTr(rho,[2,2],1);%state of second qubit - system 1 is traced out
+[params,error]=fminsearch('parp',rand(3,1),[],rho);
+poop = quantumentropy(S)-error;
+

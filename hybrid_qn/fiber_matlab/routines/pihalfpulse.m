@@ -1,0 +1,3 @@
+function y = pihalfpulse(phi)
+y = 1/sqrt(2)*[1, 1i*exp(1i*phi);...
+                1i*exp(-1i*phi), 1];

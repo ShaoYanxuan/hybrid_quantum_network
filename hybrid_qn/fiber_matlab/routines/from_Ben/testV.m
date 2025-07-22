@@ -1,0 +1,11 @@
+a = [1 0;0 0];
+b = [0 1;0 0];
+c = [0 0;1 0];
+d= [0 0;0 1];
+old_base = {a,b,c,d};
+I = [1 0;0 1]/sqrt(2);
+Z = [1, 0; 0, -1]/sqrt(2);
+X = [0, 1; 1, 0]/sqrt(2);
+Y= [0, -1i; 1i, 0]/sqrt(2);
+new_base = {I, X, -1i*Y, Z};
+T = processchangebasis(Tmatrix1,old_base,new_base)

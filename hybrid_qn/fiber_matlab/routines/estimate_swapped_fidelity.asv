@@ -1,0 +1,63 @@
+function rho_swapped = estimate_swapped_fidelity(Photon2Ion1, Photon1Ion2, Fid, model)
+if nargin < 3
+    Fid = 1;
+end
+if nargin < 4
+    model = 'depolarize';
+end
+standardbell 
+U0 = eye(4);
+checktrace(Photon2Ion1);
+checktrace(Photon1Ion2);
+    
+%% actual states
+UI = nkron(II,II);
+UZ = nkron(ZZ,II);
+UX = nkron(XX,II);
+UY = nkron(YY,II);
+
+th = 0;
+H1 = cos(th)*XX+sin(th)*YY;
+H=nkron(II,H1, II, H1);
+MS=expm(-1i*H*pi/4);
+standardpolns
+
+swapbas = nkron(II,II, II,II);
+rop=MS*swapbas*kron( Photon1Ion2 ,Photon2Ion1)*swapbas'*MS';
+
+
+% project middle qubits into 00, then trace out middle qubits 
+
+SS=nkron(II,Hm,II,Hm)*rop/trace(nkron(II,Hm,II,Hm)*rop);
+rho{1}=partialTr_slow(SS,[2,2,2,2],[2,4]);
+% disp(rho{1})
+%tang{1}=tangle(rho{1});
+
+%project middle qubits into 01, then trace out middle qubits
+SD=nkron(II,Hm,II,Vm)*rop/trace(nkron(II,Hm,II,Vm)*rop);
+rho{2}=partialTr_slow(SD,[2,2,2,2],[2,4]);
+%tang{2}=tangle(rho{2});
+
+%project middle qubits into 10, then trace out middle qubits
+DS=nkron(II,Vm,II,Hm)*rop/trace(nkron(II,Vm,II,Hm)*rop);
+rho{3}=partialTr_slow(DS,[2,2,2,2],[2,4]);
+%tang{3}=tangle(rho{3});
+
+%project middle qubits into 11,, then trace out middle qubits
+DD=nkron(II,Vm,II,Vm)*rop/trace(nkron(II,Vm,II,Vm)*rop);
+rho{4}=partialTr_slow(DD,[2,2,2,2],[2,4]);
+%tang{4}=tangle(rho{4});
+
+% rho = Photon2Ion1;
+% rho = Fid*rho+(1-Fid)/3*(UZ*rho*UZ'+UX*rho*UX'+UY*rho*UY'  );
+
+for i = 1:4
+    if contains(model, 'dephase')
+        rho{i} = Fid*rho{i}+(1-Fid)*UZ*rho{i}*UZ';
+    end
+    if contains(model, 'depolarize')
+        rho{i} = Fid*rho{i}+(1-Fid)/3*(UZ*rho{i}*UZ'+UX*rho{i}*UX'+UY*rho{i}*UY'  );
+    end
+end
+
+rho_swapped = rho;

@@ -1,0 +1,81 @@
+standardpolns
+standardbell
+%rho1= (1-y)/4*kron(II,II) + y*psipm
+
+%rho2 = [sqrt(y)/2,0,0,sqrt(y)/2; 0,1-sqrt(y),0,0;0,0,0,0;sqrt(y)/2,0,0,sqrt(y)/2];
+
+%rho3 = [1/3,0,0,sqrt(y)/2; 0,1/3,0,0;0,0,0,0;sqrt(y)/2,0,0,1/3];
+
+a=0:.01:1;
+tanglevec1=size(a);
+slvec1=size(a);
+i=1;
+for y= a, rho=(1-y)/4*kron(II,II) + y*psipm; tanglevec1(i) = tangle(rho); slvec1(i) = linearentropy(rho);i=i+1;end
+
+
+
+T=(2/3)^2:.01:1;
+tanglevec2=size(a);
+slvec2=size(a);
+i=1;
+for y= T, rho2 = [sqrt(y)/2,0,0,sqrt(y)/2; 0,1-sqrt(y),0,0;0,0,0,0;sqrt(y)/2,0,0,sqrt(y)/2]; tanglevec2(i) = tangle(rho2); slvec2(i) = linearentropy(rho2);i=i+1;end
+
+
+T=0:.01:(2/3)^2;
+tanglevec3=size(a);
+slvec3=size(a);
+i=1;
+for y= T, rho3 = [1/3,0,0,sqrt(y)/2; 0,1/3,0,0;0,0,0,0;sqrt(y)/2,0,0,1/3]; tanglevec3(i) = tangle(rho3); slvec3(i) = linearentropy(rho3);i=i+1;end
+
+
+figure(5)
+plot(slvec1,tanglevec1,'k','LineWidth',2')
+hold on
+plot(slvec2,tanglevec2,'r','LineWidth',2')
+plot(slvec3,tanglevec3,'LineWidth',2')
+
+tangles1 = [0.318,0.2738,0.1645,0.0857];
+tangleerrors1 = [0.06,0.06,0.05,0.05];
+linears1 = [0.5953,0.4457,0.3499,.2112];
+linearerrors1 = [0.03,0.06,0.06,0.05];
+
+
+tangles2 = [0.1830,0.1491,0.1481,0.1086];
+tangleerrors2 = [0.06,0.07,0.07,0.06];
+linears2 = [0.6457,0.546,0.3446,0.1876];
+linearerrors2 = [0.03,0.07,0.08,0.07]; 
+
+tangles3 = [0.269,0.1851,0.1464,0.0543];
+tangleerrors3 = [0.08,0.07,0.06,0.04];
+linears3 = [0.5853,0.5077,0.3454,0.2050];
+linearerrors3 = [0.06,0.06,0.06,0.07];
+
+k=1:1:length(tangles1);
+
+for j=k;
+plot(linears1(j),tangles1(j),'b.');
+plot(linears1(j)+linearerrors1(j)*[-1 +1],tangles1(j)*[1 1]);
+plot(linears1(j)*[1 1],tangles1(j)+tangleerrors1(j)*[-1 1]);
+j=j+1;
+end
+
+k=1:1:length(tangles2);
+for j=k;
+plot(linears2(j),tangles2(j),'r.');
+plot(linears2(j)+linearerrors2(j)*[-1 +1],tangles2(j)*[1 1],'r');
+plot(linears2(j)*[1 1],tangles2(j)+tangleerrors2(j)*[-1 1],'r');
+j=j+1;
+end
+
+k=1:1:length(tangles3);
+
+for j=k;
+plot(linears3(j),tangles3(j),'g.');
+plot(linears3(j)+linearerrors3(j)*[-1 +1],tangles3(j)*[1 1],'g');
+plot(linears3(j)*[1 1],tangles3(j)+tangleerrors3(j)*[-1 1],'g');
+j=j+1;
+end
+set(gca,'YAxisLabel',tangle)
+
+hold off;
+

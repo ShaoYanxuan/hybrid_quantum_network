@@ -1,0 +1,1 @@
+ delay form the Raman pulse trigger (us);  probability per bin (number of clicks ch1/number of trials); (optional: 3: total clicks per bin ch1; 4: number of clicks ch2/number of trials; 3: total clicks per bin ch2)

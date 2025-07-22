@@ -1,0 +1,6 @@
+function poo = dischord(rho)
+
+
+[params,poop]=measurementmutualinformation(rho);
+
+poo=(mutualinformation(rho)-measurementmutualinformation(rho))/log(2);

@@ -1,0 +1,1 @@
+ bin size(us);   overlapped coincidences probability; 	displaced coincidences probability; ratio; err; err; err

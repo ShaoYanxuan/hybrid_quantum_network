@@ -1,0 +1,13 @@
+function poo = mutualinformation(rho)
+
+S=partialTr(rho,[2,2],1);
+M=partialTr(rho,[2,2],2);
+
+HS=quantumentropy(S);
+HM=quantumentropy(M);
+HSM=quantumentropy(rho);
+
+poo=HS+HM-HSM;
+
+
+

@@ -1,0 +1,1 @@
+ bin(us);   overlapped coincidences(1/s); overlapped coincidences error; 	displaced (normalization) coincidences(1/s); displaced (normalization) coincidences err
